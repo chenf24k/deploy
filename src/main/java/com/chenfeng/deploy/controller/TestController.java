@@ -26,11 +26,12 @@ public class TestController {
     @GetMapping("/time")
     @ResponseBody
     public String now(String pattern) {
+        DateFormat df;
         if (pattern == null) {
-            DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss SSS");
+            df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss SSS");
             return df.format(new Date());
         }
-        DateFormat df = new SimpleDateFormat(pattern);
+        df = new SimpleDateFormat(pattern);
         return df.format(new Date());
     }
 }
