@@ -19,7 +19,7 @@
                 var f = $("#pattern").val();
                 console.log(f);
                 $.ajax({
-                    url: "/time?pattern=" + f,
+                    url: "/deploy/time?pattern=" + f,
                     type: "get",
                     dataType: "text",
                     success: function (data) {
