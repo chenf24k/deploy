@@ -2,15 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>更换了标题</title>
+    <title>陈枫-小工具</title>
 </head>
 <body>
-请赐予我力量吧--！AB站！还有谁！唉啊
-
-更新了一些文本
-
-
-陈枫又更新了
+<form action="/time" name="form" method="get">
+    输入格式:<br/>
+    <input type="text" id="pattern" placeholder="请输入时间显示的格式">
+    <br/>
+    如：yyyy-MM-dd HH:mm:ss
+    <br/><br/>
+    <input type="button" value="提交" onclick="getTime()">
+</form>
 
 </body>
+
+<script>
+    function getTime() {
+        var f = document.getElementsByTagName("form")[0];
+        f.action = f.action + "?pattern=" + document.getElementById("pattern").value;
+        console.log(f.action)
+    }
+</script>
 </html>
