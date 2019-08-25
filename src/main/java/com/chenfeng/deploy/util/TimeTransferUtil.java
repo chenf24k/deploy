@@ -16,7 +16,7 @@ public class TimeTransferUtil {
 
     public static String transferTime(String pattern) {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        if (pattern == null) {
+        if (pattern == null || pattern.trim().equals("")) {
             return df.format(System.currentTimeMillis() / 1000);
         }
 
