@@ -3,48 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>陈枫-小工具</title>
-    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
-    </script>
-    <script>
-        /*$(document).ready(function () {
-            $("#btn").mouseenter(function () {
-                // alert('你碰到我了！');
-            });
-            $("#btn").click(function () {
-                 alert("Text: " + $("#test").text());
-             });
-        });*/
-        $(document).ready(function () {
-            $("#btn").click(function () {
-                var path = "/deploy/getTime?pattern=" + $("#pattern").val();
-                /*if (Object.keys(f).length == 0) {
-                    path = "/deploy/getTime";
-                    console.log(path);
-                } else {
-                    path = "/deploy/getTime?pattern=" + f;
-                    console.log(path);
-                }*/
-                $.ajax({
-                    url: path,
-                    type: "get",
-                    dataType: "text",
-                    success: function (data) {
-                        console.log(data, status);
-                        alert(data);
-                    }
-                })
-                /*$.get("/time?pattern=" + f, function (data, status) {
-                    // alert("数据: " + data + "\n状态: " + status);
-                    console.log(data,status);
-                });*/
-            });
-        });
-
-        /*function formReset() {
-            document.getElementById("form1").reset();
-        }*/
-    </script>
-    <style>
+    <style type="text/css">
         .font {
             font-family: transparent;
             text-shadow: 1px 1px 1px #333;
@@ -77,9 +36,8 @@
 
         input {
             border: 1px solid #ccc;
-            padding: 7px 0px;
+            padding: 7px 5px;
             border-radius: 3px;
-            padding-left: 5px;
             -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
             box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
             -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
@@ -114,28 +72,75 @@
             -moz-transform: translate(-50%, -50%);
             transform: translate(-50%, -50%);
         }
+
+        .textarea {
+            width: 200px;
+            height: 100px;
+            resize: none;
+            background-color: #ccc;
+            border: 1px solid #2C3E50;
+            padding: 7px 0px;
+            border-radius: 3px;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+            -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+            -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+            transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+            line-height: 20px;
+            color: #FF00FF;
+        }
+
+        #times {
+            margin: 5px 5px;
+            width: 200px;
+            height: 20px;
+        }
+
     </style>
 </head>
 <body>
 
 <div class="wrapper">
+    <div id="times" class="font">
+    </div>
     <div class="wrapper_inner">
         <p class="font">输入时间的格式:</p>
-        <form id="form1">
-            <input type="text" id="pattern" placeholder="请输入时间显示的格式">
-            <button id="btn" class="button" onclick="formReset()">GO</button>
-            <p class="font">如：yyyy-MM-dd HH:mm:ss，1566696960（时间戳）</p>
-        </form>
+        <input type="text" id="pattern" placeholder="请输入时间显示的格式">
+        <button id="btn" class="button" onclick="loadDoc()">GO</button>
+        <p class="font">如：yyyy-MM-dd HH:mm:ss</p>
+        <p class="font"> 1566696960（时间戳）</p>
+        <textarea id="result" class="textarea font" disabled="disabled"></textarea>
     </div>
+
 </div>
+<script type="text/javascript">
+    function loadDoc() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("result").innerText =
+                    this.responseText;
+            }
+        };
+        xhttp.open("GET", "/deploy/getTime?pattern=" + document.getElementById('pattern').value, false);
+        xhttp.send();
+    }
 
+    function getDate() {
+        var date = new Date();
+        var date1 = date.toLocaleString();
+        var div1 = document.getElementById("times");
+        div1.innerHTML = date1;
+    }
 
+    //使用定时器每秒向div写入当前时间
+    setInterval("getDate()", 1000);
+</script>
 </body>
 </html>
 
+
 <!--
-
-
 dataType
 类型：String
 预期服务器返回的数据类型。如果不指定，jQuery 将自动根据 HTTP 包 MIME 信息来智能判断，比如 XML MIME 类型就被识别为 XML。在 1.4 中，JSON 就会生成一个 JavaScript 对象，而 script 则会执行这个脚本。随后服务器端返回的数据会根据这个值解析后，传递给回调函数。可用值:
@@ -145,5 +150,4 @@ dataType
 "json": 返回 JSON 数据 。
 "jsonp": JSONP 格式。使用 JSONP 形式调用函数时，如 "myurl?callback=?" jQuery 将自动替换 ? 为正确的函数名，以执行回调函数。
 "text": 返回纯文本字符串
-
 -->
