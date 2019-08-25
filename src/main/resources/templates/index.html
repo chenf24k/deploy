@@ -16,10 +16,16 @@
         });*/
         $(document).ready(function () {
             $("#btn").click(function () {
-                var f = $("#pattern").val();
-                console.log(f);
+                var path = "/deploy/getTime?pattern=" + $("#pattern").val();
+                /*if (Object.keys(f).length == 0) {
+                    path = "/deploy/getTime";
+                    console.log(path);
+                } else {
+                    path = "/deploy/getTime?pattern=" + f;
+                    console.log(path);
+                }*/
                 $.ajax({
-                    url: "/deploy/time?pattern=" + f,
+                    url: path,
                     type: "get",
                     dataType: "text",
                     success: function (data) {
@@ -33,6 +39,10 @@
                 });*/
             });
         });
+
+        function formReset() {
+            document.getElementById("form1").reset();
+        }
     </script>
     <style>
         .font {
@@ -111,10 +121,12 @@
 <div class="wrapper">
     <div class="wrapper_inner">
         <p class="font">输入时间的格式:</p>
-        <input type="text" id="pattern" placeholder="请输入时间显示的格式">
-        <button id="btn" class="button">GO</button>
-        <p class="font">如：yyyy-MM-dd HH:mm:ss</p>
-
+        <form id="form1">
+            <input type="text" id="pattern" placeholder="请输入时间显示的格式">
+            <button id="btn" class="button">GO</button>
+            <button id="btn_reset" class="button" onclick="formReset()">重置</button>
+            <p class="font">如：yyyy-MM-dd HH:mm:ss，1566696960（时间戳）</p>
+        </form>
     </div>
 </div>
 

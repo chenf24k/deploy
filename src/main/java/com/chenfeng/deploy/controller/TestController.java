@@ -1,15 +1,14 @@
 package com.chenfeng.deploy.controller;
 
+import com.chenfeng.deploy.util.TimeTransferUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 @Controller
+@RequestMapping("/deploy")
 public class TestController {
     @RequestMapping("/")
     public String index() {
@@ -23,16 +22,12 @@ public class TestController {
         return "Hello,world!";
     }
 
-    @GetMapping("/time")
+    // 返回当前时间
+    @GetMapping("/getTime")
     @ResponseBody
     public String now(String pattern) {
-        DateFormat df;
-        if (pattern == null) {
-            df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss SSS");
-            return df.format(new Date());
-        }
-        df = new SimpleDateFormat(pattern);
-        return df.format(new Date());
+        return TimeTransferUtil.transferTime(pattern);
     }
+
 }
 
