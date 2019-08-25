@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 @Controller
-@RequestMapping("/deploy")
 public class TestController {
     @RequestMapping("/")
     public String index() {
