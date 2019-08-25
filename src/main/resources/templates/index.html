@@ -115,6 +115,7 @@
 </div>
 <script type="text/javascript">
     function loadDoc() {
+        var param = document.getElementById('pattern').value;
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
@@ -122,8 +123,9 @@
                     this.responseText;
             }
         };
-        xhttp.open("GET", "/deploy/getTime?pattern=" + document.getElementById('pattern').value, false);
+        xhttp.open("GET", "/deploy/getTime?pattern=" + param, false);
         xhttp.send();
+        console.log();
     }
 
     function getDate() {

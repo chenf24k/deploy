@@ -17,7 +17,7 @@ public class TimeTransferUtil {
     public static String transferTime(String pattern) {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         if (pattern == null || pattern.trim().equals("")) {
-            return df.format(System.currentTimeMillis() / 1000);
+            return df.format(System.currentTimeMillis());
         }
 
         List<String> list = Arrays.asList(str);
@@ -41,6 +41,6 @@ public class TimeTransferUtil {
     }
 
     public static void main(String[] args) {
-        System.out.println(TimeTransferUtil.transferTime("1566699320"));
+        System.out.println(TimeTransferUtil.transferTime(""));
     }
 }
