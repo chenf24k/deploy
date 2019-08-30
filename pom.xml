@@ -42,6 +42,23 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>fluent-hc</artifactId>
+            <version>4.5.8</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.47</version>
+        </dependency>
+
+
+
+
+
         <!--
         provided 编译时这个Jar存在，打包和发布时不引入tomcat这个Jar
         compile 编译、运行、发布时都引入
