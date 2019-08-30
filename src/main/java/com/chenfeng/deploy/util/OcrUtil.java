@@ -37,11 +37,16 @@ public class OcrUtil {
                 JSONArray array = jsonObject.getJSONArray("TextDetections");
 
                 StringBuilder sb = new StringBuilder();
-                for (Object o : array
-                ) {
-                    JSONObject j = (JSONObject) o;
-                    sb.append(j.getString("DetectedText"));
+                try {
+                    for (Object o : array
+                    ) {
+                        JSONObject j = (JSONObject) o;
+                        sb.append(j.getString("DetectedText"));
+                    }
+                }catch (NullPointerException e){
+                    return "请检查地址";
                 }
+
                 return String.valueOf(sb);
             } catch (IOException e) {
                 e.printStackTrace();

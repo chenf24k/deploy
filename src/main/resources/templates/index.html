@@ -55,23 +55,28 @@
 
         .wrapper {
             background: #2C3E50;
-            position: absolute;
-            top: 50%;
-            left: 0;
             width: 100%;
-            height: 400px;
-            margin-top: -200px;
+            height: 800px;
             overflow: hidden;
         }
 
         .wrapper_inner {
             position: absolute;
-            left: 50%;
-            top: 50%;
+            left: 30%;
+            top: 30%;
             -webkit-transform: translate(-50%, -50%);
             -moz-transform: translate(-50%, -50%);
             transform: translate(-50%, -50%);
         }
+        .wrapper_inner2 {
+            position: absolute;
+            margin-left: 65%;
+            top: 30%;
+            -webkit-transform: translate(-50%, -50%);
+            -moz-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+        }
+
 
         .textarea {
             width: 200px;
@@ -110,13 +115,13 @@
         <p class="font"> 1566696960（时间戳）</p>
         <textarea id="result" class="textarea font" disabled="disabled"></textarea>
     </div>
-    <div class="wrapper_inner">
-        <input type="text" id="picUrl" placeholder="请输入时间显示的格式">
-        <button id="btnPicUrl" class="button" onclick="loadDoc()">GO</button>
-        <textarea id="ocr" class="textarea font" disabled="disabled"></textarea>
+    <div class="wrapper_inner2">
+        <p class="font">输入要识别的图片地址:</p>
+        <input type="text" id="picUrl" placeholder="请输入图片地址">
+        <button id="btnPicUrl" class="button" onclick="sendPicUrl()">GO</button>
+        <p class="font">必须是地址哦</p>
+        <textarea id="ocrResult" class="textarea font" disabled="disabled"></textarea>
     </div>
-
-
 </div>
 <script type="text/javascript">
     function loadDoc() {
@@ -129,6 +134,20 @@
             }
         };
         xhttp.open("GET", "/deploy/getTime?pattern=" + param, false);
+        xhttp.send();
+        console.log();
+    }
+
+    function sendPicUrl() {
+        var param = document.getElementById('picUrl').value;
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("ocrResult").innerText =
+                    this.responseText;
+            }
+        };
+        xhttp.open("GET", "/deploy/ocr?picUrl=" + param, false);
         xhttp.send();
         console.log();
     }
